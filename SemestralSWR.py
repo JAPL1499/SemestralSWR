@@ -20,6 +20,21 @@ day_count.columns = ['Days', 'Counts']
 cd_fig = px.line(day_count,x='Days', y='Counts',title="COLLECTION DAYS")
 
 #---------------------------------------------------------------
+#RECYCLE WEEK
+rw_df_1 = data[['day', 'cycle']].copy()
+rw_df_2 = rw_df_1.groupby(['day','cycle']).size().reset_index()
+rw_df_2.columns = ['Days', 'Recycle Week', 'Count']
+rw_fig = px.bar(rw_df_2, x ='Recycle Week', y = "Count", color='Days',title="RECYCLE WEEK",barmode='group' )
+
+#---------------------------------------------------------------
+#COLLECTION DAY
+
+#---------------------------------------------------------------
+#COLLECTION DAY
+
+#---------------------------------------------------------------
+#COLLECTION DAY
+#---------------------------------------------------------------
 #LAYOUT
 app.layout = html.Div(children=[
     html.H1(children='Solid Waste and Recycling Collection'),
@@ -31,6 +46,11 @@ app.layout = html.Div(children=[
     dcc.Graph(
         id='collection-day',
         figure=cd_fig
+    ),
+
+    dcc.Graph(
+        id='recycle-week',
+        figure=rw_fig
     )
 ])
 
